@@ -22,24 +22,18 @@ export default function ProductBottleScroll({ product }: Props) {
   // Load images
   useEffect(() => {
     let isMounted = true;
-    const loadImages = async () => {
-      const loadedImages: HTMLImageElement[] = [];
-      let loadedCount = 0;
-      for (let i = 1; i <= 150; i++) {
-        const img = new Image();
-        // File names like 00001.jpg
-        const paddedIndex = i.toString().padStart(5, "0");
-        img.src = `${product.folderPath}/${paddedIndex}.jpg`;
-        img.onload = () => {
-          loadedCount++;
-          if (loadedCount === 150 && isMounted) {
-            setImages(loadedImages);
-          }
-        };
-        loadedImages.push(img);
-      }
-    };
-    loadImages();
+    const loadedImages: HTMLImageElement[] = [];
+    for (let i = 1; i <= 150; i++) {
+      const img = new Image();
+      const paddedIndex = i.toString().padStart(5, "0");
+      img.src = `${product.folderPath}/${paddedIndex}.jpg`;
+      loadedImages.push(img);
+    }
+    
+    // Set images immediately so we can start rendering frames as they dynamically load
+    if (isMounted) {
+      setImages(loadedImages);
+    }
 
     return () => {
       isMounted = false;
@@ -49,7 +43,7 @@ export default function ProductBottleScroll({ product }: Props) {
   // Draw frame on canvas
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas || images.length !== 150) return;
+    if (!canvas || images.length === 0) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -58,7 +52,8 @@ export default function ProductBottleScroll({ product }: Props) {
 
     const drawImage = (index: number) => {
       const img = images[index - 1];
-      if (!img) return;
+      // Check if image is actually loaded and valid before drawing
+      if (!img || !img.complete || img.naturalHeight === 0) return;
 
       // Handle responsive resize by respecting device pixel ratio for sharpness
       canvas.width = window.innerWidth;
@@ -101,9 +96,9 @@ export default function ProductBottleScroll({ product }: Props) {
     };
   }, [images, frameIndex]);
 
-  // Force first frame render before scrolling if images loaded
+  // Force first frame render before scrolling if any images loaded
   useEffect(() => {
-      if (images.length === 150 && canvasRef.current) {
+      if (images.length > 0 && canvasRef.current) {
          const currentFrame = Math.round(frameIndex.get());
          // Only draw here if not already handled by render loop right away
       }
