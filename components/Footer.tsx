@@ -5,11 +5,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-pink-500">
-              Nano Banana
+            <h3 className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500">
+              Senvvio
             </h3>
             <p className="text-sm text-gray-400 max-w-xs leading-relaxed">
-              We create the future of premium cold-pressed juices. Nutrient-rich, ultra-fresh, and exceptionally delicious.
+              We create the future of premium streetwear. Exclusive drops, high-quality heavy cotton, and unapologetic aesthetics.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Senvvio / Nano Banana. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Senvvio. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>

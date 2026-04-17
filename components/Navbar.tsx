@@ -54,8 +54,8 @@ export default function Navbar() {
               </linearGradient>
             </defs>
           </svg>
-          <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-pink-500">
-            Nano Banana
+          <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500">
+            Senvvio
           </span>
         </div>
 

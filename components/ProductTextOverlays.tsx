@@ -38,7 +38,7 @@ export default function ProductTextOverlays({ product }: Props) {
   return (
     <div ref={containerRef} className="absolute top-0 left-0 w-full h-full pointer-events-none">
       {/* We need sticky container inside absolute, or absolute elements inside absolute? */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden">
+      <div className="sticky top-0 w-full h-[100dvh] overflow-hidden">
         {sections.map((sec, i) => (
           <motion.div
             key={i}

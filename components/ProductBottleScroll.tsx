@@ -60,24 +60,24 @@ export default function ProductBottleScroll({ product }: Props) {
       canvas.height = window.innerHeight;
 
       // Logic for "contain" fit
-      const hRatio = canvas.width / img.width;
-      const vRatio = canvas.height / img.height;
+      const hRatio = canvas.width / img.naturalWidth;
+      const vRatio = canvas.height / img.naturalHeight;
       const ratio = Math.min(hRatio, vRatio);
 
-      const centerShift_x = (canvas.width - img.width * ratio) / 2;
-      const centerShift_y = (canvas.height - img.height * ratio) / 2;
+      const centerShift_x = (canvas.width - img.naturalWidth * ratio) / 2;
+      const centerShift_y = (canvas.height - img.naturalHeight * ratio) / 2;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(
         img,
         0,
         0,
-        img.width,
-        img.height,
+        img.naturalWidth,
+        img.naturalHeight,
         centerShift_x,
         centerShift_y,
-        img.width * ratio,
-        img.height * ratio
+        img.naturalWidth * ratio,
+        img.naturalHeight * ratio
       );
     };
 
@@ -99,14 +99,23 @@ export default function ProductBottleScroll({ product }: Props) {
   // Force first frame render before scrolling if any images loaded
   useEffect(() => {
       if (images.length > 0 && canvasRef.current) {
-         const currentFrame = Math.round(frameIndex.get());
-         // Only draw here if not already handled by render loop right away
+          const canvas = canvasRef.current;
+          const ctx = canvas.getContext("2d");
+          if (ctx) {
+              const img = images[0];
+              if (img && img.complete && img.naturalHeight > 0) {
+                  canvas.width = window.innerWidth;
+                  canvas.height = window.innerHeight;
+                  const ratio = Math.min(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
+                  ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, (canvas.width - img.naturalWidth * ratio) / 2, (canvas.height - img.naturalHeight * ratio) / 2, img.naturalWidth * ratio, img.naturalHeight * ratio);
+              }
+          }
       }
   }, [images])
 
   return (
     <div ref={containerRef} className="relative w-full h-[500vh]">
-      <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center pointer-events-none">
+      <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center pointer-events-none">
         <canvas ref={canvasRef} className="w-full h-full object-contain" />
       </div>
     </div>
