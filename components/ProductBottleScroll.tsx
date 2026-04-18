@@ -1,8 +1,28 @@
-// Load images
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
+import { Product } from "@/data/products";
+
+interface Props {
+  product: Product;
+}
+
+export default function ProductBottleScroll({ product }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const frameIndex = useTransform(scrollYProgress, [0, 1], [1, 150]);
+
+  // Load images
   useEffect(() => {
     let isMounted = true;
     const loadedImages: HTMLImageElement[] = [];
-    
     for (let i = 1; i <= 150; i++) {
       const img = new Image();
       const paddedIndex = i.toString().padStart(5, "0");
@@ -70,7 +90,7 @@
     const render = () => {
       const currentFrame = Math.round(frameIndex.get());
       if (currentFrame >= 1 && currentFrame <= 150) {
-         drawImage(currentFrame);
+          drawImage(currentFrame);
       }
       animationFrameId = requestAnimationFrame(render);
     };
@@ -104,7 +124,7 @@
               }
           }
       }
-  }, [images])
+  }, [images]);
 
   return (
     <div ref={containerRef} className="relative w-full h-[500vh]">
