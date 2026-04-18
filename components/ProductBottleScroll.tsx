@@ -2,13 +2,11 @@
   useEffect(() => {
     let isMounted = true;
     const loadedImages: HTMLImageElement[] = [];
+    
     for (let i = 1; i <= 150; i++) {
       const img = new Image();
       const paddedIndex = i.toString().padStart(5, "0");
-      
-      // Add /Senvvio right before the folder path!
-      img.src = `/Senvvio${product.folderPath}/${paddedIndex}.jpg`; 
-      
+      img.src = `/Senvvio${product.folderPath}/${paddedIndex}.jpg`;
       loadedImages.push(img);
     }
     
@@ -17,10 +15,6 @@
       setImages(loadedImages);
     }
 
-    return () => {
-      isMounted = false;
-    };
-  }, [product.folderPath]);
     return () => {
       isMounted = false;
     };
