@@ -1,32 +1,14 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
-import { Product } from "@/data/products";
-
-interface Props {
-  product: Product;
-}
-
-export default function ProductBottleScroll({ product }: Props) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const frameIndex = useTransform(scrollYProgress, [0, 1], [1, 150]);
-
-  // Load images
+// Load images
   useEffect(() => {
     let isMounted = true;
     const loadedImages: HTMLImageElement[] = [];
     for (let i = 1; i <= 150; i++) {
       const img = new Image();
       const paddedIndex = i.toString().padStart(5, "0");
-      img.src = `${product.folderPath}/${paddedIndex}.jpg`;
+      
+      // Add /Senvvio right before the folder path!
+      img.src = `/Senvvio${product.folderPath}/${paddedIndex}.jpg`; 
+      
       loadedImages.push(img);
     }
     
@@ -35,6 +17,10 @@ export default function ProductBottleScroll({ product }: Props) {
       setImages(loadedImages);
     }
 
+    return () => {
+      isMounted = false;
+    };
+  }, [product.folderPath]);
     return () => {
       isMounted = false;
     };
