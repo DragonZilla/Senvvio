@@ -93,6 +93,109 @@ export default function Home() {
                 style={{ background: `linear-gradient(135deg, ${product.themeColor}55, transparent)` }}
               >
                 <div className="w-full h-full bg-black/40 backdrop-blur-3xl rounded-[2.8rem] border border-white/10 flex items-center justify-center p-12">
+                   <div className="rotate-12 scale-110 opacity-40 mix-blend-overlay w-full h-full" style={{ background: `url(/Senvvio${product.folderPath}/00001.jpg) center/contain no-repeat` }} />
+                </div>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* Freshness Section */}
+          <section className="py-32 px-6 lg:px-8 bg-black/30 backdrop-blur-lg border-y border-white/5">
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+              >
+                <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white tracking-tight">
+                  {product.freshnessSection.title}
+                </h2>
+                <p className="text-xl text-white/80 leading-relaxed font-light">
+                  {product.freshnessSection.description}
+                </p>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Buy Now Section */}
+          <section className="py-32 px-6 lg:px-8 max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="bg-black/60 backdrop-blur-2xl rounded-[3rem] p-8 md:p-16 border border-white/10 flex flex-col md:flex-row gap-16 items-center shadow-2xl"
+            >
+              <div className="flex-1 space-y-8">
+                <div>
+                  <h3 className="text-sm font-bold text-white/50 tracking-[0.2em] uppercase mb-4">
+                    Ready to taste the future?
+                  </h3>
+                  <div className="flex items-baseline gap-4">
+                    <span className="text-6xl font-black text-white">
+                      {product.buyNowSection.price}
+                    </span>
+                    <span className="text-xl text-white/60 font-light">
+                      {product.buyNowSection      <Navbar />
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={product.id}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="relative w-full"
+        >
+          {/* Scroll Experience */}
+          <div className="relative">
+            <ProductBottleScroll product={product} />
+            <ProductTextOverlays product={product} />
+            
+            {/* Scroll Indicator */}
+            <motion.div 
+               className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 text-white/50 flex flex-col items-center gap-2 pointer-events-none"
+               animate={{ y: [0, 10, 0] }}
+               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+               <span className="text-xs tracking-[0.3em] uppercase font-bold">Scroll to Explore</span>
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </motion.div>
+          </div>
+
+          {/* Details Section */}
+          <section className="py-32 px-6 lg:px-8 max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
+            >
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">
+                  {product.detailsSection.title}
+                </h2>
+                <p className="text-xl text-white/80 leading-relaxed font-light">
+                  {product.detailsSection.description}
+                </p>
+                <div className="mt-10 grid grid-cols-3 gap-6">
+                  {product.stats.map((stat, i) => (
+                    <div key={i} className="flex flex-col">
+                      <span className="text-3xl font-black text-white">{stat.val}</span>
+                      <span className="text-sm font-semibold text-white/60 uppercase tracking-widest mt-1">
+                        {stat.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div
+                className="aspect-square rounded-[3rem] p-1 shadow-2xl relative overflow-hidden"
+                style={{ background: `linear-gradient(135deg, ${product.themeColor}55, transparent)` }}
+              >
+                <div className="w-full h-full bg-black/40 backdrop-blur-3xl rounded-[2.8rem] border border-white/10 flex items-center justify-center p-12">
                    <div className="rotate-12 scale-110 opacity-40 mix-blend-overlay w-full h-full" style={{ background: `url(${product.folderPath}/00001.jpg) center/contain no-repeat` }} />
                 </div>
               </div>
