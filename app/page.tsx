@@ -93,7 +93,7 @@ export default function Home() {
                 style={{ background: `linear-gradient(135deg, ${product.themeColor}55, transparent)` }}
               >
                 <div className="w-full h-full bg-black/40 backdrop-blur-3xl rounded-[2.8rem] border border-white/10 flex items-center justify-center p-12">
-                   <div className="rotate-12 scale-110 opacity-40 mix-blend-overlay w-full h-full" style={{ background: `url(/Senvvio${product.folderPath}/LH 44 Sunshine.png) center/contain no-repeat` }} />
+                   <div className="rotate-12 scale-110 opacity-40 mix-blend-overlay w-full h-full" style={{ background: `url(/Senvvio${product.folderPath}/sunshine.png) center/contain no-repeat` }} />
                 </div>
               </div>
             </motion.div>
