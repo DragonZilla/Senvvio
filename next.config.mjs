@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: "export",
+  basePath: "/Senvvio", // Tells Next.js to add this to the start of all /paths
   images: {
     unoptimized: true,
   },
