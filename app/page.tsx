@@ -88,14 +88,16 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+              
               <div
                 className="aspect-square rounded-[3rem] p-1 shadow-2xl relative overflow-hidden"
                 style={{ background: `linear-gradient(135deg, ${product.themeColor}55, transparent)` }}
               >
-                <div className="w-full h-full bg-black/40 backdrop-blur-3xl rounded-[2.8rem] border border-white/10 flex items-center justify-center p-12">
-                   <div className="w-full h-full rounded-[2.8rem]" style={{ background: `url(/Senvvio${product.folderPath}/sunshine.png) center/cover no-repeat` }} />
+                <div className="w-full h-full rounded-[2.8rem] border border-white/10 overflow-hidden shadow-inner">
+                   <div className="w-full h-full transition-transform duration-700 hover:scale-105" style={{ background: `url(/Senvvio${product.folderPath}/sunshine.png) center/cover no-repeat` }} />
                 </div>
               </div>
+
             </motion.div>
           </section>
 
